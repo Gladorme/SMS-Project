@@ -57,6 +57,54 @@ public class Connexion {
             e.printStackTrace();
         }
     }
+    public void removeContact(String nom) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("DELETE FROM `contacts` WHERE `contacts`.`nom` = ? OR WHERE `contacts`.`numero_tel` = ?");
+            preparedStatement.setString(1, nom);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public void removeContact(String nom, String prenom) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("DELETE FROM `contacts` WHERE `contacts`.`nom` = ? AND `contacts`.`prenom` = ?");
+            preparedStatement.setString(1, nom);
+            preparedStatement.setString(2, prenom);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public void changeContact(String mail, String numero_tel) { //méthode pour changer le mail d'une personne
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("UPDATE `contacts` SET `email` = ?  WHERE `contacts`.`numero_tel` = ?");
+            preparedStatement.setString(1,mail);
+            preparedStatement.setString(2,numero_tel);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public void changeContact(String nom, String prenom, String numero_tel) { //méthode pour changer un numéro de telephone en fonction du nom et prenom
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("UPDATE `contacts` SET `numero_tel` = ? WHERE `contacts`.`nom` = ? AND `contacts`.`prenom` = ?");
+            preparedStatement.setString(1,numero_tel);            
+            preparedStatement.setString(2,nom);
+            preparedStatement.setString(3,prenom);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
     public void close() {
         try {
             connection.close();
