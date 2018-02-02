@@ -1,0 +1,10 @@
+/**
+ Export to JSON plugin for PHPMyAdmin
+ @version 4.6.4
+ */
+
+// Database 'sms-project-client'
+
+// sms-project-client.contacts
+
+[{"numero_tel":"0111111111","nom":"ABOUKORA","prenom":"Ahmed","contact_pro":"1","contact_perso":"0"}, {"numero_tel":"0222222222","nom":"MENDES DE JESUS","prenom":"Danny","contact_pro":"1","contact_perso":"0"}, {"numero_tel":"0333333333","nom":"CHOQUARD","prenom":"Thomas","contact_pro":"1","contact_perso":"0"}, {"numero_tel":"0444444444","nom":"LADORME","prenom":"Guillaume","contact_pro":"1","contact_perso":"0"}, {"numero_tel":"0666666666","nom":"Moi","prenom":null,"contact_pro":"0","contact_perso":"0"}, {"numero_tel":"0555555555","nom":"DUCREUX","prenom":"Aldric","contact_pro":"1","contact_perso":"0"}]
