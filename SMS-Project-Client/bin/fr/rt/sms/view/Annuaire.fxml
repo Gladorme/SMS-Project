@@ -100,9 +100,9 @@
                               </GridPane>
                               <ButtonBar layoutX="512.0" layoutY="444.0" prefHeight="25.0" prefWidth="260.0">
                                 <buttons>
-                                  <Button mnemonicParsing="false" text="Nouveau ..." />
-                                    <Button mnemonicParsing="false" text="Editer ..." />
-                                    <Button mnemonicParsing="false" text="Supprimer" />
+                                  <Button mnemonicParsing="false" onAction="#handleNewContact" text="Nouveau ..." />
+                                    <Button mnemonicParsing="false" onAction="#handleEditContact" text="Editer ..." />
+                                    <Button mnemonicParsing="false" onAction="#handleDeleteContact" text="Supprimer" />
                                 </buttons>
                               </ButtonBar>
                            </children>
