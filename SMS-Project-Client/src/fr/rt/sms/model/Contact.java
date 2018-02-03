@@ -1,5 +1,7 @@
 package fr.rt.sms.model;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -11,18 +13,22 @@ public class Contact {
     private final StringProperty adresse;
     private final StringProperty ville;
     private final StringProperty naissance;
+    private final IntegerProperty pro;
+    private final StringProperty tel;
 
-    public Contact() {
-    	this(null,null);
+    public Contact () {
+    	this(null,null, null, null, null, null, 0, null);
     }
     
-    public Contact(String nom, String prenom) {
+    public Contact (String nom, String prenom, String email, String adresse, String ville, String naissance, int pro, String tel) {
         this.nom =  new SimpleStringProperty(nom);
         this.prenom = new SimpleStringProperty(prenom);
-        this.email = new SimpleStringProperty("Inconnue ...");
-        this.adresse = new SimpleStringProperty("Inconnue ...");
-        this.ville = new SimpleStringProperty("Inconnue ...");
-        this.naissance = new SimpleStringProperty("Inconnue ...");
+        this.email = new SimpleStringProperty(email);
+        this.adresse = new SimpleStringProperty(adresse);
+        this.ville = new SimpleStringProperty(ville);
+        this.naissance = new SimpleStringProperty(naissance);
+        this.pro = new SimpleIntegerProperty(pro);
+        this.tel = new SimpleStringProperty(tel);
     }
 
     public String getNom () {
@@ -90,5 +96,37 @@ public class Contact {
     }
     public StringProperty naissanceProperty() {
     	return this.naissance;
+    }
+    
+    
+    public int getPro () {
+    	return this.pro.get();
+    }
+    public String getProString () {
+    	//return String.valueOf(this.pro.get());
+    	if (this.pro.get() == 1) {
+    		return "Oui";
+    	}else {
+    		return "Non";
+    	}
+    }
+    
+    public void setPro (int pro) {
+    	this.pro.set(pro);
+    }
+    public IntegerProperty proProperty() {
+    	return this.pro;
+    }
+    
+    
+    public String getTel () {
+    	return this.tel.get();
+    }
+    
+    public void setTel (String tel) {
+    	this.tel.set(tel);
+    }
+    public StringProperty telProperty() {
+    	return this.tel;
     }
 }

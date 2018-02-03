@@ -30,20 +30,10 @@ public class ContactEditDialogController {
     private void initialize() {
     }
 
-    /**
-     * Sets the stage of this dialog.
-     *
-     * @param dialogStage
-     */
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
 
-    /**
-     * Sets the person to be edited in the dialog.
-     *
-     * @param person
-     */
     public void setContact(Contact contact) {
         this.contact = contact;
 
@@ -55,18 +45,10 @@ public class ContactEditDialogController {
         villeField.setText(contact.getVille());
     }
 
-    /**
-     * Returns true if the user clicked OK, false otherwise.
-     *
-     * @return
-     */
     public boolean isValiderClicked() {
         return validerClicked;
     }
 
-    /**
-     * Called when the user clicks ok.
-     */
     @FXML
     private void handleValider() {
         if (isInputValid()) {
@@ -82,19 +64,11 @@ public class ContactEditDialogController {
         }
     }
 
-    /**
-     * Called when the user clicks cancel.
-     */
     @FXML
     private void handleAnnuler() {
         dialogStage.close();
     }
 
-    /**
-     * Validates the user input in the text fields.
-     *
-     * @return true if the input is valid
-     */
     private boolean isInputValid() {
         String errorMessage = "";
 
@@ -120,7 +94,6 @@ public class ContactEditDialogController {
         if (errorMessage.length() == 0) {
             return true;
         } else {
-            // Show the error message.
             Alert alert = new Alert(AlertType.ERROR);
             alert.initOwner(dialogStage);
             alert.setTitle("Erreur: Inputs incorrects !");

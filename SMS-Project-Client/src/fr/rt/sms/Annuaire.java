@@ -8,11 +8,11 @@ public class Annuaire {
 	private ObservableList<Contact> contactData = FXCollections.observableArrayList();
 	
 	public Annuaire() {
-		contactData.add(new Contact("Ladorme", "Guillaume"));
-		contactData.add(new Contact("Ducreux", "Aldric"));
-		contactData.add(new Contact("Aboukora", "Ahmed"));
-		contactData.add(new Contact("Mendes", "Danny"));
-		contactData.add(new Contact("Choquard", "Thomas"));
+		contactData.add(new Contact("Ladorme", "Guillaume", "guillaume.ladorme@etu.unice.fr", "325 chemin de l'IUT", "Valbonne", "21/02/1998", 0, "0682209302"));
+		//contactData.add(new Contact("Ducreux", "Aldric"));
+		//contactData.add(new Contact("Aboukora", "Ahmed"));
+		//contactData.add(new Contact("Mendes", "Danny"));
+		//contactData.add(new Contact("Choquard", "Thomas"));
 	}
 	public ObservableList<Contact> getContactData() {
 		return contactData;

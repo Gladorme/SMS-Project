@@ -33,12 +33,17 @@ public class ContactController {
     private Label adresseLabel;
     @FXML
     private Label villeLabel;
+    @FXML
+    private Label proLabel;
+    @FXML
+    private Label telLabel;
     
 
     	
     public ContactController(){
     	
     }
+    
 	@FXML
 	private void initialize() {
 		nomColumn.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
@@ -48,10 +53,12 @@ public class ContactController {
 		
 		contactTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showContactDetails(newValue));
 	}
+	
     public void setAnnuaire(Annuaire Annuaire) {
         this.Annuaire = Annuaire;
         contactTable.setItems(Annuaire.getContactData());
     }
+    
     private void showContactDetails(Contact contact){
     	if (contact != null) {
     		nomLabel.setText(contact.getNom());
@@ -60,6 +67,8 @@ public class ContactController {
     		emailLabel.setText(contact.getEmail());
     		adresseLabel.setText(contact.getAdresse());
     		villeLabel.setText(contact.getVille());
+    		proLabel.setText(contact.getProString());
+    		telLabel.setText(contact.getTel());
     	}else {
     		nomLabel.setText("");
     		prenomLabel.setText("");
@@ -67,8 +76,11 @@ public class ContactController {
     		emailLabel.setText("");
     		adresseLabel.setText("");
     		villeLabel.setText("");
+    		proLabel.setText("");
+    		telLabel.setText("");
     	}
     }
+    
     @FXML
     private void handleDeleteContact() {
         int selectedIndex = contactTable.getSelectionModel().getSelectedIndex();
@@ -83,6 +95,7 @@ public class ContactController {
             alert.showAndWait();
         }
     }
+    
     @FXML
     private void handleNewContact() {
         Contact tempContact = new Contact();
@@ -92,10 +105,6 @@ public class ContactController {
         }
     }
 
-    /**
-     * Called when the user clicks the edit button. Opens a dialog to edit
-     * details for the selected person.
-     */
     @FXML
     private void handleEditContact() {
     	Contact selectedPerson = contactTable.getSelectionModel().getSelectedItem();

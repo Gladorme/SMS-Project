@@ -9,21 +9,40 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
 	private static Stage primaryStage;
+	private static BorderPane nav;
 	
 	@Override
 	public void start(Stage primaryStage) {
 		MainApp.primaryStage = primaryStage;
 		MainApp.primaryStage.setTitle("SMS-Project");
 		
+		initNav();
+		
 		showAnnuaire();
 	}
+	
+	public void initNav() {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/Nav.fxml"));
+            nav = (BorderPane) loader.load();
 
+            Scene scene = new Scene(nav);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
 	public static void showLogin() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -43,15 +62,25 @@ public class MainApp extends Application {
 		}
 	}
 	
+    public static void showAccueil() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/Accueil.fxml"));
+            AnchorPane personOverview = (AnchorPane) loader.load();
+
+            nav.setCenter(personOverview);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
 	public static void showAnnuaire() {
 		try {
-			FXMLLoader loader = new FXMLLoader();
+            FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/Annuaire.fxml"));
-            AnchorPane Login = (AnchorPane) loader.load();
-            
-            Scene scene = new Scene(Login);
-            primaryStage.setScene(scene);
-            primaryStage.show();
+            AnchorPane personOverview = (AnchorPane) loader.load();
+
+            nav.setCenter(personOverview);
             
             ContactController controller = loader.getController();
             Annuaire Annuaire = new Annuaire();
