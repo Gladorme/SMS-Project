@@ -1,6 +1,9 @@
 package fr.rt.sms;
 
+import java.sql.ResultSet;
+
 import fr.rt.sms.model.Contact;
+import fr.rt.sms.utils.Connexion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -13,6 +16,16 @@ public class Annuaire {
 		//contactData.add(new Contact("Aboukora", "Ahmed"));
 		//contactData.add(new Contact("Mendes", "Danny"));
 		//contactData.add(new Contact("Choquard", "Thomas"));
+		
+		Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
+        connexion.connect();
+
+        ResultSet contact = connexion.query("SELECT * FROM Contacts");
+        System.out.println(contact);      
+        
+        
+    	connexion.close();
+		
 	}
 	public ObservableList<Contact> getContactData() {
 		return contactData;

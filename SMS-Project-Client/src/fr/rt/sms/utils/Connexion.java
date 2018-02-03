@@ -59,6 +59,7 @@ public class Connexion {
             e.printStackTrace();
         }
     }
+    
     /*public void removeContact(String nom) {
         try {
             PreparedStatement preparedStatement = connection
@@ -68,7 +69,7 @@ public class Connexion {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }*/
+    }
     public void removeContact(String nom, String prenom) {
         try {
             PreparedStatement preparedStatement = connection
@@ -103,7 +104,7 @@ public class Connexion {
             e.printStackTrace();
         }
     }
-    /*public void addentreehistorique(SMS sms) {
+    public void addentreehistorique(SMS sms) {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("INSERT INTO historique VALUES(?,?,?,?,?,?)");
@@ -120,8 +121,8 @@ public class Connexion {
     }*/
     public void close() {
         try {
-            connection.close();
             statement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
