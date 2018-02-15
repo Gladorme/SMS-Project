@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
+import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 
 public class ContactEditDialogController {
@@ -21,6 +22,10 @@ public class ContactEditDialogController {
     private TextField adresseField;
     @FXML
     private TextField villeField;
+    @FXML
+    private CheckBox proField;
+    @FXML
+    private TextField telField;
 	
     private Stage dialogStage;
     private Contact contact;
@@ -43,6 +48,13 @@ public class ContactEditDialogController {
         emailField.setText(contact.getEmail());
         adresseField.setText(contact.getAdresse());
         villeField.setText(contact.getVille());
+		if (contact.getPro() == 1) {
+			proField.setSelected(true);;
+		} else {
+			proField.setSelected(false);
+		}
+		telField.setText(contact.getTel());
+        
     }
 
     public boolean isValiderClicked() {
@@ -58,6 +70,12 @@ public class ContactEditDialogController {
         	contact.setEmail(emailField.getText());
         	contact.setAdresse(adresseField.getText());
         	contact.setVille(villeField.getText());
+        	if (proField.isSelected()) {
+        		contact.setPro(1);
+        	} else {
+        		contact.setPro(0);
+        	}
+        	contact.setTel(telField.getText());
 
             validerClicked = true;
             dialogStage.close();
@@ -89,6 +107,9 @@ public class ContactEditDialogController {
         }
         if (villeField.getText() == null || villeField.getText().length() == 0) {
             errorMessage += "Vous n'avez pas saissi la ville !\n";
+        }
+        if (telField.getText() == null || telField.getText().length() == 0) {
+            errorMessage += "Vous n'avez pas saissi le numéro de téléphone !\n";
         }
 
         if (errorMessage.length() == 0) {

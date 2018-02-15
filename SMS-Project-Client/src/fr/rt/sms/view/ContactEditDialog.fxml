@@ -25,6 +25,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label text="Nom :" />
@@ -40,7 +41,9 @@
             <TextField fx:id="adresseField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="villeField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label text="Contact professionel :" GridPane.rowIndex="6" />
-            <CheckBox mnemonicParsing="false" text="Oui" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <CheckBox fx:id="proField" mnemonicParsing="false" text="Oui" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label text="Numéro de téléphone :" GridPane.rowIndex="7" />
+            <TextField fx:id="telField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <ButtonBar layoutX="286.0" layoutY="296.0" prefHeight="40.0" prefWidth="200.0">
