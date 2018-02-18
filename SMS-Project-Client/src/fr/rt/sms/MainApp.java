@@ -30,7 +30,6 @@ public class MainApp extends Application {
 	
 	public void initNav() {
         try {
-            // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/Nav.fxml"));
             nav = (BorderPane) loader.load();

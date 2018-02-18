@@ -24,7 +24,7 @@ public class Annuaire {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}     
+		} 
         
         
     	connexion.close();

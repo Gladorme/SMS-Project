@@ -29,6 +29,13 @@ public class Contact {
         this.naissance = new SimpleStringProperty(naissance);
         this.pro = new SimpleIntegerProperty(pro);
         this.tel = new SimpleStringProperty(tel);
+        
+        /* A placer autre part et rajouter les checks
+        Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
+        connexion.connect();
+        connexion.addContact(this);
+        connexion.close();
+        */
     }
 
     public String getNom () {
@@ -103,7 +110,6 @@ public class Contact {
     	return this.pro.get();
     }
     public String getProString () {
-    	//return String.valueOf(this.pro.get());
     	if (this.pro.get() == 1) {
     		return "Oui";
     	}else {

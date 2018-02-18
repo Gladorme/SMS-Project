@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import fr.rt.sms.model.Contact;
+
 public class Connexion {
     private String DBPath = "Chemin à la base de donnée";
     private Connection connection = null;
@@ -42,7 +44,8 @@ public class Connexion {
         return resultat;
   
     }
-    public void addContact(ContactSQL contact) {
+    
+    public void addContact(Contact contact) {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("INSERT INTO Contacts VALUES(?,?,?,?,?,?,?,?)");
@@ -119,6 +122,7 @@ public class Connexion {
             e.printStackTrace();
         }
     }*/
+    
     public void close() {
         try {
             statement.close();
