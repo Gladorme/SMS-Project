@@ -62,6 +62,24 @@ public class Connexion {
             e.printStackTrace();
         }
     }
+    public void changeContact(Contact contact, String tel) {
+        try {
+            PreparedStatement preparedStatement = connection
+            .prepareStatement("UPDATE Contacts SET nom = ?, prenom = ?, naissance = ?, email = ?, adresse = ?, ville = ?, pro = ?, tel = ? WHERE tel = ?");
+            preparedStatement.setString(1, contact.getNom());
+            preparedStatement.setString(2, contact.getPrenom());
+            preparedStatement.setString(3, contact.getNaissance());
+            preparedStatement.setString(4, contact.getEmail());
+            preparedStatement.setString(5, contact.getAdresse());
+            preparedStatement.setString(6, contact.getVille() );
+            preparedStatement.setInt(7, contact.getPro());
+            preparedStatement.setString(8, contact.getTel());
+            preparedStatement.setString(9, tel);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     /*public void removeContact(String nom) {
         try {

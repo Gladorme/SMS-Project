@@ -99,7 +99,7 @@ public class ContactController {
     @FXML
     private void handleNewContact() {
         Contact tempContact = new Contact();
-        boolean validerClicked = MainApp.showContactEditDialog(tempContact);
+        boolean validerClicked = MainApp.showContactAddDialog(tempContact);
         if (validerClicked) {
         	Annuaire.getContactData().add(tempContact);
         }

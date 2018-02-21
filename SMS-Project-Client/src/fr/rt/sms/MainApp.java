@@ -3,6 +3,7 @@ package fr.rt.sms;
 import java.io.IOException;
 
 import fr.rt.sms.model.Contact;
+import fr.rt.sms.view.ContactAddDialogController;
 import fr.rt.sms.view.ContactController;
 import fr.rt.sms.view.ContactEditDialogController;
 import javafx.application.Application;
@@ -25,7 +26,7 @@ public class MainApp extends Application {
 		
 		initNav();
 		
-		showAnnuaire();
+		showAccueil();
 	}
 	
 	public void initNav() {
@@ -65,9 +66,9 @@ public class MainApp extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/Accueil.fxml"));
-            AnchorPane personOverview = (AnchorPane) loader.load();
+            AnchorPane accueil = (AnchorPane) loader.load();
 
-            nav.setCenter(personOverview);
+            nav.setCenter(accueil);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,9 +78,9 @@ public class MainApp extends Application {
 		try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/Annuaire.fxml"));
-            AnchorPane personOverview = (AnchorPane) loader.load();
+            AnchorPane annuaire = (AnchorPane) loader.load();
 
-            nav.setCenter(personOverview);
+            nav.setCenter(annuaire);
             
             ContactController controller = loader.getController();
             Annuaire Annuaire = new Annuaire();
@@ -97,12 +98,36 @@ public class MainApp extends Application {
 	        AnchorPane page = (AnchorPane) loader.load();
 
 	        Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Edit Person");
+	        dialogStage.setTitle("Editer un contact");
 	        dialogStage.initModality(Modality.WINDOW_MODAL);
 	        Scene scene = new Scene(page);
 	        dialogStage.setScene(scene);
 
 	        ContactEditDialogController controller = loader.getController();
+	        controller.setDialogStage(dialogStage);
+	        controller.setContact(contact);
+
+	        dialogStage.showAndWait();
+
+	        return controller.isValiderClicked();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+	public static boolean showContactAddDialog(Contact contact) {
+	    try {
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(MainApp.class.getResource("view/ContactAddDialog.fxml"));
+	        AnchorPane page = (AnchorPane) loader.load();
+
+	        Stage dialogStage = new Stage();
+	        dialogStage.setTitle("Rajouter un contact");
+	        dialogStage.initModality(Modality.WINDOW_MODAL);
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+
+	        ContactAddDialogController controller = loader.getController();
 	        controller.setDialogStage(dialogStage);
 	        controller.setContact(contact);
 

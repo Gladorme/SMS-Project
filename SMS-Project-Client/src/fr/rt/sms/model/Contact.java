@@ -1,5 +1,6 @@
 package fr.rt.sms.model;
 
+import fr.rt.sms.utils.Connexion;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -29,13 +30,6 @@ public class Contact {
         this.naissance = new SimpleStringProperty(naissance);
         this.pro = new SimpleIntegerProperty(pro);
         this.tel = new SimpleStringProperty(tel);
-        
-        /* A placer autre part et rajouter les checks
-        Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
-        connexion.connect();
-        connexion.addContact(this);
-        connexion.close();
-        */
     }
 
     public String getNom () {
@@ -134,5 +128,17 @@ public class Contact {
     }
     public StringProperty telProperty() {
     	return this.tel;
+    }
+    public void insertSQL() {
+        Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
+        connexion.connect();
+        connexion.addContact(this);
+        connexion.close();
+    }
+    public void updateSQL(String tel) {
+        Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
+        connexion.connect();
+        connexion.changeContact(this, tel);
+        connexion.close();
     }
 }

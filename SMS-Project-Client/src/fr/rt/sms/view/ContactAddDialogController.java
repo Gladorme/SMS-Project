@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 
-public class ContactEditDialogController {
+public class ContactAddDialogController {
 
     @FXML
     private TextField nomField;
@@ -29,7 +29,6 @@ public class ContactEditDialogController {
 	
     private Stage dialogStage;
     private Contact contact;
-    private String tel;
     private boolean validerClicked = false;
     
     @FXML
@@ -55,7 +54,6 @@ public class ContactEditDialogController {
 			proField.setSelected(false);
 		}
 		telField.setText(contact.getTel());
-		tel = contact.getTel();
         
     }
 
@@ -79,7 +77,7 @@ public class ContactEditDialogController {
         	}
         	contact.setTel(telField.getText());
 
-        	contact.updateSQL(tel);
+        	contact.insertSQL();
             validerClicked = true;
             dialogStage.close();
         }
