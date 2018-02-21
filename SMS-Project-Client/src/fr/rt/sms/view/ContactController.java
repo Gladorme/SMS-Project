@@ -85,7 +85,9 @@ public class ContactController {
     private void handleDeleteContact() {
         int selectedIndex = contactTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
+        	Contact selectedPerson = contactTable.getSelectionModel().getSelectedItem();
         	contactTable.getItems().remove(selectedIndex);
+        	selectedPerson.deleteSQL();
         } else {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Erreur: Vous n'avez pas sélectionné de contact");

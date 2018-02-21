@@ -25,7 +25,6 @@ public class MainApp extends Application {
 		MainApp.primaryStage.setTitle("SMS-Project");
 		
 		initNav();
-		
 		showAccueil();
 	}
 	
@@ -90,6 +89,18 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
+	
+    public static void showMessagerie() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/Messagerie.fxml"));
+            AnchorPane messagerie = (AnchorPane) loader.load();
+
+            nav.setCenter(messagerie);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 	
 	public static boolean showContactEditDialog(Contact contact) {
 	    try {

@@ -81,16 +81,17 @@ public class Connexion {
         }
     }
     
-    /*public void removeContact(String nom) {
+    public void deleteContact(Contact contact) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("DELETE FROM `contacts` WHERE `contacts`.`nom` = ? OR `contacts`.`numero_tel` = ?");
-            preparedStatement.setString(1, nom);
+                    .prepareStatement("DELETE FROM Contacts WHERE tel = ?");
+            preparedStatement.setString(1, contact.getTel());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    /*
     public void removeContact(String nom, String prenom) {
         try {
             PreparedStatement preparedStatement = connection

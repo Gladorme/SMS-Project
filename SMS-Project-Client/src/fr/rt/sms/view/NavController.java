@@ -20,7 +20,7 @@ public class NavController {
     }
     @FXML
     private void handleMessage() {
-        //MainApp.showMessage();
+        MainApp.showMessagerie();
     }
     @FXML
     private void handleHistorique() {

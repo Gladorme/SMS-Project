@@ -141,4 +141,10 @@ public class Contact {
         connexion.changeContact(this, tel);
         connexion.close();
     }
+    public void deleteSQL() {
+        Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
+        connexion.connect();
+        connexion.deleteContact(this);
+        connexion.close();
+    }
 }
