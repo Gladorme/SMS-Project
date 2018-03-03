@@ -1,7 +1,7 @@
 package fr.rt.sms.view;
 
-import fr.rt.sms.model.Contact;
 import javafx.fxml.FXML;
+import fr.rt.sms.model.Contact;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;

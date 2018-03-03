@@ -6,6 +6,7 @@ import fr.rt.sms.model.Contact;
 import fr.rt.sms.view.ContactAddDialogController;
 import fr.rt.sms.view.ContactController;
 import fr.rt.sms.view.ContactEditDialogController;
+import fr.rt.sms.view.SMSDialogController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -141,6 +142,29 @@ public class MainApp extends Application {
 	        ContactAddDialogController controller = loader.getController();
 	        controller.setDialogStage(dialogStage);
 	        controller.setContact(contact);
+
+	        dialogStage.showAndWait();
+
+	        return controller.isValiderClicked();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+	public static boolean showSMSDialog(Contact contact) {
+	    try {
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(MainApp.class.getResource("view/SMSDialog.fxml"));
+	        AnchorPane page = (AnchorPane) loader.load();
+
+	        Stage dialogStage = new Stage();
+	        dialogStage.setTitle("Envoyer un SMS à " + contact.getPrenom() + " " + contact.getNom());
+	        dialogStage.initModality(Modality.WINDOW_MODAL);
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+
+	        SMSDialogController controller = loader.getController();
+	        controller.setDialogStage(dialogStage);
 
 	        dialogStage.showAndWait();
 

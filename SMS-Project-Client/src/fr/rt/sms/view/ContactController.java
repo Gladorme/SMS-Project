@@ -99,6 +99,24 @@ public class ContactController {
     }
     
     @FXML
+    private void handleSMS() {
+    	Contact selectedContact = contactTable.getSelectionModel().getSelectedItem();
+        if (selectedContact != null) {
+            boolean validerClicked = MainApp.showSMSDialog(selectedContact);
+            if (validerClicked) {
+            }
+        } else {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(MainApp.getPrimaryStage());
+            alert.setTitle("Erreur: Vous n'avez pas sélectionné de contact");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez séléctionner un contact pour lui envoyer un SMS");
+
+            alert.showAndWait();
+        }
+    }
+    
+    @FXML
     private void handleNewContact() {
         Contact tempContact = new Contact();
         boolean validerClicked = MainApp.showContactAddDialog(tempContact);
@@ -109,11 +127,11 @@ public class ContactController {
 
     @FXML
     private void handleEditContact() {
-    	Contact selectedPerson = contactTable.getSelectionModel().getSelectedItem();
-        if (selectedPerson != null) {
-            boolean validerClicked = MainApp.showContactEditDialog(selectedPerson);
+    	Contact selectedContact = contactTable.getSelectionModel().getSelectedItem();
+        if (selectedContact != null) {
+            boolean validerClicked = MainApp.showContactEditDialog(selectedContact);
             if (validerClicked) {
-                showContactDetails(selectedPerson);
+                showContactDetails(selectedContact);
             }
         } else {
             Alert alert = new Alert(AlertType.WARNING);

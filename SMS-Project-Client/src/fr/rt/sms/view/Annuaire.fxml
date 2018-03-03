@@ -74,8 +74,9 @@
                                     <Label fx:id="telLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                  </children>
                               </GridPane>
-                              <ButtonBar layoutX="512.0" layoutY="557.0" prefHeight="25.0" prefWidth="260.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                              <ButtonBar layoutX="512.0" layoutY="557.0" prefHeight="25.0" prefWidth="485.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
                                 <buttons>
+                                    <Button mnemonicParsing="false" onAction="#handleSMS" text="Envoyer un SMS" />
                                   <Button mnemonicParsing="false" onAction="#handleNewContact" text="Nouveau ..." />
                                     <Button mnemonicParsing="false" onAction="#handleEditContact" text="Editer ..." />
                                     <Button mnemonicParsing="false" onAction="#handleDeleteContact" text="Supprimer" />
