@@ -1,5 +1,6 @@
 package fr.rt.sms.model;
 
+import fr.rt.sms.utils.Connexion;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -8,13 +9,16 @@ import javafx.beans.property.StringProperty;
 public class SMS {
 	private Integer id_sms;
     private final StringProperty contenu;
-    private final StringProperty tel_src;
+    public static String tel_src = "0682209302";
     private final StringProperty tel_dest;
     private final IntegerProperty chiffrement;
 	
-	public SMS (String contenu, String tel_src, String tel_dest, Integer chiffrement) {
+    public SMS () {
+    	this(null,null,0);
+    }
+    
+	public SMS (String contenu, String tel_dest, Integer chiffrement) {
 		this.contenu = new SimpleStringProperty(contenu);
-		this.tel_src = new SimpleStringProperty(tel_src);
 		this.tel_dest = new SimpleStringProperty(tel_dest);
 		this.chiffrement = new SimpleIntegerProperty(chiffrement);
 	}
@@ -32,14 +36,11 @@ public class SMS {
     	return this.contenu;
     }
     
-    public String getTel_src () {
-    	return this.tel_src.get();
+    public static String getTel_src () {
+    	return SMS.tel_src;
     }
-    public void setTel_src (String tel_src) {
-    	this.tel_src.set(tel_src);
-    }
-    public StringProperty tel_srcProperty() {
-    	return this.tel_src;
+    public static void setTel_src (String tel_src) {
+    	SMS.tel_src = tel_src;
     }
     
     public String getTel_dest () {
@@ -60,5 +61,17 @@ public class SMS {
     }
     public IntegerProperty chiffrementProperty() {
     	return this.chiffrement;
+    }
+    public void insertSQL() {
+        Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
+        connexion.connect();
+        connexion.addSMS(this);
+        connexion.close();
+    }
+    public void deleteSQL() {
+        Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
+        connexion.connect();
+        connexion.deleteSMS(this);
+        connexion.close();
     }
 }

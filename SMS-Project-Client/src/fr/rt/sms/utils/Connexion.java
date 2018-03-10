@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import fr.rt.sms.model.Contact;
+import fr.rt.sms.model.SMS;
 
 public class Connexion {
     private String DBPath = "Chemin à la base de donnée";
@@ -62,6 +63,7 @@ public class Connexion {
             e.printStackTrace();
         }
     }
+    
     public void changeContact(Contact contact, String tel) {
         try {
             PreparedStatement preparedStatement = connection
@@ -91,56 +93,34 @@ public class Connexion {
             e.printStackTrace();
         }
     }
-    /*
-    public void removeContact(String nom, String prenom) {
+    
+    public void addSMS(SMS sms) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("DELETE FROM `contacts` WHERE `contacts`.`nom` = ? AND `contacts`.`prenom` = ?");
-            preparedStatement.setString(1, nom);
-            preparedStatement.setString(2, prenom);
+                    .prepareStatement("INSERT INTO SMS (contenu,tel_src,tel_dest,chiffrement) VALUES(?,?,?,?)");
+            preparedStatement.setString(1, sms.getContenu());
+            preparedStatement.setString(2, SMS.getTel_src());
+            preparedStatement.setString(3, sms.getTel_dest());
+            preparedStatement.setInt(4, sms.getChiffrement());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public void changeContact(String mail, String numero_tel) { //méthode pour changer le mail d'une personne
+    
+    public void deleteSMS(SMS sms) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("UPDATE `contacts` SET `email`=?  WHERE `contacts`.`numero_tel`= ?");
-            preparedStatement.setString(1,mail);
-            preparedStatement.setString(2,numero_tel);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    } 
-    public void changeContact(String nom, String prenom, String numero_tel) { //méthode pour changer un numéro de telephone en fonction du nom et prenom
-        try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("UPDATE `contacts` SET `numero_tel` = ? WHERE `contacts`.`nom` = ? AND `contacts`.`prenom` = ?");
-            preparedStatement.setString(1,numero_tel);            
-            preparedStatement.setString(2,nom);
-            preparedStatement.setString(3,prenom);
+                    .prepareStatement("DELETE FROM SMS WHERE id_sms = ?");
+            preparedStatement.setInt(1, sms.getId_sms());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public void addentreehistorique(SMS sms) {
-        try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("INSERT INTO historique VALUES(?,?,?,?,?,?)");
-            preparedStatement.setInt(1, sms.getIdsms());
-            preparedStatement.setString(2, sms.getTexte());
-            preparedStatement.setString(3, sms.getNumero_tel_source());
-            preparedStatement.setString(4, sms.getNumero_tel_source());
-            preparedStatement.setString(5, sms.getDateenvoi());
-            preparedStatement.setInt(6,0);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }*/
+    
+    
+
     
     public void close() {
         try {

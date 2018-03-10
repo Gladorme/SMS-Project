@@ -165,6 +165,7 @@ public class MainApp extends Application {
 
 	        SMSDialogController controller = loader.getController();
 	        controller.setDialogStage(dialogStage);
+	        controller.setContact(contact);
 
 	        dialogStage.showAndWait();
 
