@@ -1,16 +1,24 @@
 package fr.rt.sms.view;
 
+import java.util.Base64;
+
+import fr.rt.sms.model.Contact;
+import fr.rt.sms.model.SMS;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 
 public class SMSDialogController {
 
     @FXML
     private TextArea contenuArea;
+    @FXML
+    private CheckBox chiffrement;
 
+    private Contact contact;
     private Stage dialogStage;
     private boolean validerClicked = false;
     
@@ -21,6 +29,9 @@ public class SMSDialogController {
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
     
     public boolean isValiderClicked() {
         return validerClicked;
@@ -28,9 +39,19 @@ public class SMSDialogController {
    
     @FXML
     private void handleValider() {
+    	String contenuBase64;
         if (isInputValid()) {
-
-        	//sms.insertSQL();
+        	SMS sms = new SMS();
+        	sms.setTel_dest(contact.getTel());
+        	if (chiffrement.isSelected()) {
+        		sms.setChiffrement(1);
+        		contenuBase64 = Base64.getEncoder().encodeToString(contenuArea.getText().getBytes());
+        		sms.setContenu(contenuBase64);
+        	} else {
+        		sms.setChiffrement(0);
+        		sms.setContenu(contenuArea.getText());
+        	}
+        	sms.insertSQL();
             validerClicked = true;
             dialogStage.close();
         }
