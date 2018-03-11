@@ -6,6 +6,7 @@ import fr.rt.sms.model.Contact;
 import fr.rt.sms.view.ContactAddDialogController;
 import fr.rt.sms.view.ContactController;
 import fr.rt.sms.view.ContactEditDialogController;
+import fr.rt.sms.view.LoginController;
 import fr.rt.sms.view.SMSDialogController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -25,11 +26,10 @@ public class MainApp extends Application {
 		MainApp.primaryStage = primaryStage;
 		MainApp.primaryStage.setTitle("SMS-Project");
 		
-		initNav();
-		showAccueil();
+		showLogin();
 	}
 	
-	public void initNav() {
+	public static void initNav() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/Nav.fxml"));
@@ -53,9 +53,7 @@ public class MainApp extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
             
-            ContactController controller = loader.getController();
-            Annuaire Annuaire = new Annuaire();
-            controller.setAnnuaire(Annuaire);
+            LoginController controller = loader.getController();
             
 		} catch (IOException e) {
 			e.printStackTrace();

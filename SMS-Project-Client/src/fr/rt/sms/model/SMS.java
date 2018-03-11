@@ -9,7 +9,7 @@ import javafx.beans.property.StringProperty;
 public class SMS {
 	private Integer id_sms;
     private final StringProperty contenu;
-    public static String tel_src = "0682209302";
+    public static String tel_src;
     private final StringProperty tel_dest;
     private final IntegerProperty chiffrement;
 	
