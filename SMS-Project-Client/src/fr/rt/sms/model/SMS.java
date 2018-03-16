@@ -1,5 +1,16 @@
 package fr.rt.sms.model;
 
+import java.io.IOException;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+
+import com.google.gson.Gson;
+
 import fr.rt.sms.utils.Connexion;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -12,6 +23,7 @@ public class SMS {
     public static String tel_src;
     private final StringProperty tel_dest;
     private final IntegerProperty chiffrement;
+    private String url = "192.168.43.201";
 	
     public SMS () {
     	this(null,null,0);
@@ -61,6 +73,16 @@ public class SMS {
     }
     public IntegerProperty chiffrementProperty() {
     	return this.chiffrement;
+    }
+    public void sendSMS() throws ClientProtocolException, IOException {
+    	Gson         gson          = new Gson();
+    	HttpClient   httpClient    = HttpClientBuilder.create().build();
+    	HttpPost     post          = new HttpPost(url);
+    	StringEntity postingString = new StringEntity(gson.toJson("test"));
+    	post.setEntity(postingString);
+    	post.setHeader("Content-type", "application/json");
+    	HttpResponse  response = httpClient.execute(post);
+    	System.out.println(response.getEntity().getContent());
     }
     public void insertSQL() {
         Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");

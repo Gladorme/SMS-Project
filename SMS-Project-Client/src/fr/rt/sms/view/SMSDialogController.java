@@ -1,6 +1,9 @@
 package fr.rt.sms.view;
 
+import java.io.IOException;
 import java.util.Base64;
+
+import org.apache.http.client.ClientProtocolException;
 
 import fr.rt.sms.model.Contact;
 import fr.rt.sms.model.SMS;
