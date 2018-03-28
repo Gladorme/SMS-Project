@@ -1,9 +1,8 @@
 package fr.rt.sms.view;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Base64;
-
-import org.apache.http.client.ClientProtocolException;
 
 import fr.rt.sms.model.Contact;
 import fr.rt.sms.model.SMS;
@@ -54,6 +53,15 @@ public class SMSDialogController {
         		sms.setChiffrement(0);
         		sms.setContenu(contenuArea.getText());
         	}
+        	try {
+				sms.sendSMS();
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         	sms.insertSQL();
             validerClicked = true;
             dialogStage.close();

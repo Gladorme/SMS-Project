@@ -24,7 +24,7 @@ public class NavController {
     }
     @FXML
     private void handleHistorique() {
-        //MainApp.showHistorique();
+        MainApp.showHistorique();
     }
 	
 }

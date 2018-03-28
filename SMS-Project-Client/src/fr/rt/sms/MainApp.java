@@ -6,11 +6,13 @@ import fr.rt.sms.model.Contact;
 import fr.rt.sms.view.ContactAddDialogController;
 import fr.rt.sms.view.ContactController;
 import fr.rt.sms.view.ContactEditDialogController;
+import fr.rt.sms.view.HistoriqueController;
 import fr.rt.sms.view.LoginController;
 import fr.rt.sms.view.SMSDialogController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -25,7 +27,6 @@ public class MainApp extends Application {
 	public void start(Stage primaryStage) {
 		MainApp.primaryStage = primaryStage;
 		MainApp.primaryStage.setTitle("SMS-Project");
-		
 		showLogin();
 	}
 	
@@ -52,8 +53,6 @@ public class MainApp extends Application {
             Scene scene = new Scene(Login);
             primaryStage.setScene(scene);
             primaryStage.show();
-            
-            LoginController controller = loader.getController();
             
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -96,6 +95,20 @@ public class MainApp extends Application {
             AnchorPane messagerie = (AnchorPane) loader.load();
 
             nav.setCenter(messagerie);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void showHistorique() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/Historique.fxml"));
+            AnchorPane historique = (AnchorPane) loader.load();
+            
+	        HistoriqueController controller = loader.getController();
+
+            nav.setCenter(historique);
         } catch (IOException e) {
             e.printStackTrace();
         }

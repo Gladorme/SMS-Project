@@ -41,7 +41,7 @@
             </ImageView>
             <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#handleMessage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
-                  <Image url="@../../../../../img/sms.png" />
+                  <Image url="@../../../../../img/groupe.png" />
                </image>
                <GridPane.margin>
                   <Insets left="100.0" top="25.0" />
@@ -65,7 +65,7 @@
                   <Insets left="110.0" top="10.0" />
                </padding>
             </Label>
-            <Label text="Envoyer un message" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label text="           Groupes" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <padding>
                   <Insets left="75.0" top="10.0" />
                </padding>
