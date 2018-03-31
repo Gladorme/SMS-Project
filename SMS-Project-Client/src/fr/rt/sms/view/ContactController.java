@@ -96,9 +96,7 @@ public class ContactController {
     private void handleSMS() {
     	Contact selectedContact = contactTable.getSelectionModel().getSelectedItem();
         if (selectedContact != null) {
-            boolean validerClicked = MainApp.showSMSDialog(selectedContact);
-            if (validerClicked) {
-            }
+            MainApp.showSMSDialog(selectedContact);
         } else {
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(MainApp.getPrimaryStage());

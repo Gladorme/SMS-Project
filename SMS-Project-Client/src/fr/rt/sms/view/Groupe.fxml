@@ -47,13 +47,13 @@
                               </TableView>
                               <ButtonBar layoutX="344.0" layoutY="547.0" prefHeight="25.0" prefWidth="392.0" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="45.0">
                                 <buttons>
-                                    <Button mnemonicParsing="false" text="Supprimer le groupe" />
-                                    <Button mnemonicParsing="false" text="Créer un nouveau groupe" />
+                                    <Button mnemonicParsing="false" onAction="#handleDeleteGroupe" text="Supprimer le groupe" />
+                                    <Button mnemonicParsing="false" onAction="#handleNewGroupe" text="Créer un nouveau groupe" />
                                 </buttons>
                               </ButtonBar>
-                              <ButtonBar layoutX="326.0" layoutY="512.0" prefHeight="25.0" prefWidth="420.0">
+                              <ButtonBar layoutX="326.0" layoutY="512.0" prefHeight="25.0" prefWidth="420.0" AnchorPane.bottomAnchor="59.0" AnchorPane.rightAnchor="45.0">
                                  <buttons>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="189.0" text="Envoyer un SMS groupé" />
+                                    <Button mnemonicParsing="false" onAction="#handleSMS" prefHeight="25.0" prefWidth="189.0" text="Envoyer un SMS groupé" />
                                     <Button mnemonicParsing="false" text="Supprimer le contact du groupe" />
                                  </buttons>
                               </ButtonBar>

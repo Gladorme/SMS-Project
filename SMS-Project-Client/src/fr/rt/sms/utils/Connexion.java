@@ -178,8 +178,15 @@ public class Connexion {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-    
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("DELETE FROM Appartenances WHERE groupe_id = ?");
+            preparedStatement.setInt(1, groupe.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } 
 
     
     public void close() {
