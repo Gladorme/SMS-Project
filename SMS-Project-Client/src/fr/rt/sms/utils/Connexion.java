@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import fr.rt.sms.model.Contact;
+import fr.rt.sms.model.Groupe;
 import fr.rt.sms.model.SMS;
 
 public class Connexion {
@@ -119,6 +120,65 @@ public class Connexion {
         }
     }
     
+    public ResultSet getContacts(String groupe) {
+    	ResultSet resultat = null;
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("SELECT * FROM Contacts, Groupes, Appartenances WHERE id_groupe = groupe_id AND tel = contact_tel AND Groupes.nom = ?");
+            preparedStatement.setString(1, groupe);
+            resultat = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		return resultat;
+    }
+    
+    
+    
+    public void deleteGroupe(String nom) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("DELETE FROM Groupe WHERE nom = ?");
+            preparedStatement.setString(1, nom);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void addGroupe(Groupe groupe) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("INSERT INTO Groupes (nom) VALUES(?)");
+            preparedStatement.setString(1, groupe.getNom());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void addAppartenance(Groupe groupe, Contact contact) {
+        try {
+            PreparedStatement preparedStatement = connection
+            .prepareStatement("INSERT INTO Appartenances (goupe_id, contact_tel) VALUES(?,?)");
+            preparedStatement.setInt(1, groupe.getId());
+            preparedStatement.setString(9, contact.getTel());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void deleteGroupe(Groupe groupe) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("DELETE FROM Groupes WHERE nom = ?");
+            preparedStatement.setString(1, groupe.getNom());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
 
     

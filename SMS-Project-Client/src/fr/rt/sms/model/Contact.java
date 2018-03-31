@@ -129,6 +129,7 @@ public class Contact {
     public StringProperty telProperty() {
     	return this.tel;
     }
+    
     public void insertSQL() {
         Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
         connexion.connect();
@@ -145,6 +146,12 @@ public class Contact {
         Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
         connexion.connect();
         connexion.deleteContact(this);
+        connexion.close();
+    }
+    public void addAppartenance(Groupe groupe) {
+        Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
+        connexion.connect();
+        connexion.addAppartenance(groupe, this);
         connexion.close();
     }
 }

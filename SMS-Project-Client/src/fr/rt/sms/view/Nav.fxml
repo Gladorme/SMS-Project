@@ -39,7 +39,7 @@
                   <Insets left="100.0" top="25.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#handleMessage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+            <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#handleGroupe" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@../../../../../img/groupe.png" />
                </image>
@@ -55,22 +55,22 @@
                   <Insets left="100.0" top="25.0" />
                </GridPane.margin>
             </ImageView>
-            <Label text="Accueil" GridPane.rowIndex="1">
+            <Label onMouseClicked="#handleAccueil" text="Accueil" GridPane.rowIndex="1">
                <padding>
                   <Insets left="110.0" top="10.0" />
                </padding>
             </Label>
-            <Label text="Annuaire" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label onMouseClicked="#handleAnnuaire" text="Annuaire" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <padding>
                   <Insets left="110.0" top="10.0" />
                </padding>
             </Label>
-            <Label text="           Groupes" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label onMouseClicked="#handleGroupe" text="           Groupes" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <padding>
                   <Insets left="75.0" top="10.0" />
                </padding>
             </Label>
-            <Label text="Historique des messages" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Label onMouseClicked="#handleHistorique" text="Historique des messages" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <padding>
                   <Insets left="65.0" top="10.0" />
                </padding>

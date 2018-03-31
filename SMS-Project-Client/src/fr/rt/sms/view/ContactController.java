@@ -13,7 +13,7 @@ import fr.rt.sms.model.Contact;
 public class ContactController {
 	
 	@SuppressWarnings("unused")
-	private Annuaire Annuaire;
+	private Annuaire annuaire;
 	@FXML
     private TableView<Contact> contactTable;
     @FXML
@@ -38,12 +38,6 @@ public class ContactController {
     @FXML
     private Label telLabel;
     
-
-    	
-    public ContactController(){
-    	
-    }
-    
 	@FXML
 	private void initialize() {
 		nomColumn.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
@@ -55,7 +49,7 @@ public class ContactController {
 	}
 	
     public void setAnnuaire(Annuaire Annuaire) {
-        this.Annuaire = Annuaire;
+        this.annuaire = Annuaire;
         contactTable.setItems(Annuaire.getContactData());
     }
     
@@ -121,7 +115,7 @@ public class ContactController {
         Contact tempContact = new Contact();
         boolean validerClicked = MainApp.showContactAddDialog(tempContact);
         if (validerClicked) {
-        	Annuaire.getContactData().add(tempContact);
+        	annuaire.getContactData().add(tempContact);
         }
     }
 

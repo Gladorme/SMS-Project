@@ -6,6 +6,7 @@ import fr.rt.sms.model.Contact;
 import fr.rt.sms.view.ContactAddDialogController;
 import fr.rt.sms.view.ContactController;
 import fr.rt.sms.view.ContactEditDialogController;
+import fr.rt.sms.view.GroupeController;
 import fr.rt.sms.view.HistoriqueController;
 import fr.rt.sms.view.LoginController;
 import fr.rt.sms.view.SMSDialogController;
@@ -88,13 +89,17 @@ public class MainApp extends Application {
 		}
 	}
 	
-    public static void showMessagerie() {
+    public static void showGroupe() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/Messagerie.fxml"));
-            AnchorPane messagerie = (AnchorPane) loader.load();
+            loader.setLocation(MainApp.class.getResource("view/Groupe.fxml"));
+            AnchorPane groupe = (AnchorPane) loader.load();
+            
+            GroupeController controller = loader.getController();
+            AnnuaireGroupe annuaireGroupe = new AnnuaireGroupe();
+            controller.setAnnuaireGroupe(annuaireGroupe);
 
-            nav.setCenter(messagerie);
+            nav.setCenter(groupe);
         } catch (IOException e) {
             e.printStackTrace();
         }

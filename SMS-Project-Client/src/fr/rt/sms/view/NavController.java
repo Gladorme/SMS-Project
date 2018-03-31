@@ -19,8 +19,8 @@ public class NavController {
         MainApp.showAnnuaire();
     }
     @FXML
-    private void handleMessage() {
-        MainApp.showMessagerie();
+    private void handleGroupe() {
+        MainApp.showGroupe();
     }
     @FXML
     private void handleHistorique() {
