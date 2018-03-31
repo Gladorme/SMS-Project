@@ -3,11 +3,10 @@ package fr.rt.sms;
 import java.io.IOException;
 
 import fr.rt.sms.model.Contact;
-import fr.rt.sms.model.Groupe;
+import fr.rt.sms.view.ConnaissanceController;
 import fr.rt.sms.view.ContactAddDialogController;
 import fr.rt.sms.view.ContactController;
 import fr.rt.sms.view.ContactEditDialogController;
-import fr.rt.sms.view.GroupeAddDialogController;
 import fr.rt.sms.view.GroupeController;
 import fr.rt.sms.view.HistoriqueController;
 import fr.rt.sms.view.LoginController;
@@ -176,14 +175,13 @@ public class MainApp extends Application {
 	        AnchorPane page = (AnchorPane) loader.load();
 
 	        Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Envoyer un SMS à " + contact.getPrenom() + " " + contact.getNom());
+	        dialogStage.setTitle("Envoyer un SMS ï¿½ " + contact.getPrenom() + " " + contact.getNom());
 	        dialogStage.initModality(Modality.WINDOW_MODAL);
 	        Scene scene = new Scene(page);
 	        dialogStage.setScene(scene);
 
 	        SMSDialogController controller = loader.getController();
 	        controller.setDialogStage(dialogStage);
-	        controller.setMode(false);
 	        controller.setContact(contact);
 
 	        dialogStage.showAndWait();
@@ -194,54 +192,22 @@ public class MainApp extends Application {
 	        return false;
 	    }
 	}
-	public static boolean showSMSDialog(Groupe groupe) {
-	    try {
-	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(MainApp.class.getResource("view/SMSDialog.fxml"));
-	        AnchorPane page = (AnchorPane) loader.load();
+	public static void showConnaissance() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/Connaissance.fxml"));
+            AnchorPane connaissance = (AnchorPane) loader.load();
+            nav.setCenter(connaissance);
 
-	        Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Envoyer un SMS aux contacts dans le groupe " + groupe.getNom());
-	        dialogStage.initModality(Modality.WINDOW_MODAL);
-	        Scene scene = new Scene(page);
-	        dialogStage.setScene(scene);
-
-	        SMSDialogController controller = loader.getController();
-	        controller.setDialogStage(dialogStage);
-	        controller.setMode(true);
-	        controller.setGroupe(groupe);
-
-	        dialogStage.showAndWait();
-
-	        return controller.isValiderClicked();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        return false;
-	    }
-	}
-	public static boolean showGroupeAddDialog(Groupe groupe) {
-	    try {
-	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(MainApp.class.getResource("view/GroupeAddDialog.fxml"));
-	        AnchorPane page = (AnchorPane) loader.load();
-
-	        Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Rajouter un groupe");
-	        dialogStage.initModality(Modality.WINDOW_MODAL);
-	        Scene scene = new Scene(page);
-	        dialogStage.setScene(scene);
-
-	        GroupeAddDialogController controller = loader.getController();
-	        controller.setDialogStage(dialogStage);
-	        controller.setGroupe(groupe);
-
-	        dialogStage.showAndWait();
-
-	        return controller.isValiderClicked();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        return false;
-	    }
+            Scene scene = new Scene(connaissance);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            
+            ConnaissanceController controller = loader.getController();
+            
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static Stage getPrimaryStage() {

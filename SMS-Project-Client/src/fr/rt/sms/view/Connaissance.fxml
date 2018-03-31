@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.rt.sms.view.ConnaissanceController">
+   <children>
+      <SplitPane dividerPositions="0.006688963210702341" layoutX="214.0" layoutY="51.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="998.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Label layoutX="20.0" layoutY="22.0" text="Numéro de téléphone actuel :" />
+                  <Label layoutX="20.0" layoutY="47.0" text="Contacts:" />
+                  <Label layoutX="17.0" layoutY="153.0" text="Potentielles Connaissances: " />
+                  <Label fx:id="tel_srcLabel" layoutX="232.0" layoutY="25.0" text="Label" />
+                  <Label fx:id="tel_contact" layoutX="92.0" layoutY="47.0" text="Label" />
+                  <Label fx:id="connaissancespotentielles" layoutX="215.0" layoutY="153.0" text="Label" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

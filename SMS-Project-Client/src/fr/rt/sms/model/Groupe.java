@@ -19,10 +19,6 @@ public class Groupe {
     public Groupe (String nom) {
     	this.nom = new SimpleStringProperty(nom);
     }
-    public Groupe (String nom, ObservableList<Contact> contacts) {
-    	this.nom = new SimpleStringProperty(nom);
-    	this.contacts = contacts;
-    }
     
     
     

@@ -14,7 +14,7 @@ public class Annuaire {
 	public Annuaire() {
 		//contactData.add(new Contact("Ladorme", "Guillaume", "guillaume.ladorme@etu.unice.fr", "325 chemin de l'IUT", "Valbonne", "21/02/1998", 0, "0682209302"));
 		
-		Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
+ 	Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
         connexion.connect();
 
         ResultSet contact = connexion.query("SELECT * FROM Contacts");

@@ -5,7 +5,6 @@ import java.net.MalformedURLException;
 import java.util.Base64;
 
 import fr.rt.sms.model.Contact;
-import fr.rt.sms.model.Groupe;
 import fr.rt.sms.model.SMS;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -22,9 +21,7 @@ public class SMSDialogController {
     private CheckBox chiffrement;
 
     private Contact contact;
-    private boolean mode;
     private Stage dialogStage;
-    private Groupe groupe;
     private boolean validerClicked = false;
     
     @FXML
@@ -37,63 +34,14 @@ public class SMSDialogController {
     public void setContact(Contact contact) {
         this.contact = contact;
     }
-    public void setGroupe(Groupe groupe) {
-        this.groupe = groupe;
-    }
-    public void setMode(boolean mode) {
-    	// mode = false -> message unique
-    	// mode = true -> message groupé
-    	this.mode = mode;
-    }
+    
     public boolean isValiderClicked() {
         return validerClicked;
     }
    
     @FXML
-    private void handleValider() {	
-        if (mode) {
-        	envoieMultiple();
-        }else {
-        	envoieUnique();
-        }
-    }
-    
-    public void envoieMultiple () {
+    private void handleValider() {
     	String contenuBase64;
-        if (isInputValid()) {
-        	System.out.println(groupe.getNom());
-        	System.out.println(groupe.getContacts());
-        	for (Contact contact : groupe.getContacts()) {
-        		System.out.println("contact: " + contact.getNom() + " \n");
-	        	SMS sms = new SMS();
-	        	sms.setTel_dest(contact.getTel());
-	        	if (chiffrement.isSelected()) {
-	        		sms.setChiffrement(1);
-	        		contenuBase64 = Base64.getEncoder().encodeToString(contenuArea.getText().getBytes());
-	        		sms.setContenu(contenuBase64);
-	        	} else {
-	        		sms.setChiffrement(0);
-	        		sms.setContenu(contenuArea.getText());
-	        	}
-	        	try {
-					sms.sendSMS();
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	        	sms.insertSQL();
-        	}
-            validerClicked = true;
-            dialogStage.close();
-        }
-    }
-    
-    public void envoieUnique() {
-    	String contenuBase64;
-    	
         if (isInputValid()) {
         	SMS sms = new SMS();
         	sms.setTel_dest(contact.getTel());
@@ -119,7 +67,6 @@ public class SMSDialogController {
             dialogStage.close();
         }
     }
-
 
     @FXML
     private void handleAnnuler() {

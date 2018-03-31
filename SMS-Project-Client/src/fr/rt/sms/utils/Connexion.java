@@ -12,7 +12,7 @@ import fr.rt.sms.model.Groupe;
 import fr.rt.sms.model.SMS;
 
 public class Connexion {
-    private String DBPath = "Chemin à la base de donnée";
+    private String DBPath = "fr.rt.sms.utils/bdd.db";
     private Connection connection = null;
     private Statement statement = null;
  
@@ -25,7 +25,7 @@ public class Connexion {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:" + DBPath);
             statement = connection.createStatement();
-            System.out.println("Connexion à " + DBPath + " avec succès");
+            System.out.println("Connexion ï¿½ " + DBPath + " avec succï¿½s");
         } catch (ClassNotFoundException notFoundException) {
             notFoundException.printStackTrace();
             System.out.println("Erreur de connexion");
@@ -41,7 +41,7 @@ public class Connexion {
             resultat = statement.executeQuery(request);
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Erreur dans la requête : " + request);
+            System.out.println("Erreur dans la requï¿½te : " + request);
         }
         return resultat;
   
@@ -178,15 +178,8 @@ public class Connexion {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("DELETE FROM Appartenances WHERE groupe_id = ?");
-            preparedStatement.setInt(1, groupe.getId());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    } 
+    }
+    
 
     
     public void close() {
