@@ -26,8 +26,10 @@ public class NavController {
     private void handleHistorique() {
         MainApp.showHistorique();
     }
-    @FXML 
-    private void handleConnaissance() { 
-        MainApp.showConnaissance(); 
-    } 
+    @FXML
+    private void handleConnassance() {
+        MainApp.showConnaissance();
+        }
+    
+	
 }

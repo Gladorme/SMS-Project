@@ -29,7 +29,7 @@ public class HistoriqueController {
         connexion.connect();
 
         ObservableList<String> smsListe = FXCollections.observableArrayList();
-        ResultSet sms = connexion.query("SELECT * FROM SMS ORDER BY id_sms desc");
+        ResultSet sms = connexion.query("SELECT * FROM SMS");
         try {
 			while (sms.next()) {
 				String chiffrement;

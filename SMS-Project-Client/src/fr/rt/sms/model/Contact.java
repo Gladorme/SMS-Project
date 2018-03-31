@@ -148,12 +148,6 @@ public class Contact {
         connexion.deleteContact(this);
         connexion.close();
     }
-    public void deleteAppartenance(Groupe groupe) {
-        Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
-        connexion.connect();
-        connexion.deleteAppartenance(groupe, this);
-        connexion.close();
-    }
     public void addAppartenance(Groupe groupe) {
         Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
         connexion.connect();

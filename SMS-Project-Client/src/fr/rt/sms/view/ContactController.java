@@ -96,7 +96,9 @@ public class ContactController {
     private void handleSMS() {
     	Contact selectedContact = contactTable.getSelectionModel().getSelectedItem();
         if (selectedContact != null) {
-            MainApp.showSMSDialog(selectedContact);
+            boolean validerClicked = MainApp.showSMSDialog(selectedContact);
+            if (validerClicked) {
+            }
         } else {
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(MainApp.getPrimaryStage());
@@ -131,25 +133,6 @@ public class ContactController {
             alert.setTitle("Erreur: Vous n'avez pas sélectionné de contact");
             alert.setHeaderText(null);
             alert.setContentText("Veuillez séléctionner un contact pour l'éditer");
-
-            alert.showAndWait();
-        }
-    }
-    
-    @FXML
-    private void handleAddGroupe() {
-    	Contact selectedContact = contactTable.getSelectionModel().getSelectedItem();
-        if (selectedContact != null) {
-            boolean validerClicked = MainApp.showAppartenanceAdd(selectedContact);
-            if (validerClicked) {
-                showContactDetails(selectedContact);
-            }
-        } else {
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.initOwner(MainApp.getPrimaryStage());
-            alert.setTitle("Erreur: Vous n'avez pas sélectionné de contact");
-            alert.setHeaderText(null);
-            alert.setContentText("Veuillez séléctionner un contact pour le rajouter à un groupe");
 
             alert.showAndWait();
         }

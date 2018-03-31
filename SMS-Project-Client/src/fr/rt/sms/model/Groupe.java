@@ -19,10 +19,6 @@ public class Groupe {
     public Groupe (String nom) {
     	this.nom = new SimpleStringProperty(nom);
     }
-    public Groupe (String nom, ObservableList<Contact> contacts) {
-    	this.nom = new SimpleStringProperty(nom);
-    	this.contacts = contacts;
-    }
     
     
     
@@ -39,10 +35,16 @@ public class Groupe {
     public int getId () {
     	Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
         connexion.connect();
-        int id = connexion.getId(this);
+        ResultSet id = connexion.query("SELECT * FROM Groupe WHERE nom =" + this.getNom());
         connexion.close();
         
-        return id;
+        try {
+			return id.getInt("id_groupe");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return 0;
     }
     
     
@@ -66,12 +68,6 @@ public class Groupe {
         Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
         connexion.connect();
         connexion.deleteGroupe(this);
-        connexion.close();
-    }
-    public void addAppartenance(Contact contact) {
-        Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
-        connexion.connect();
-        connexion.addAppartenance(this, contact);
         connexion.close();
     }
     
