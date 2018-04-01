@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.rt.sms.view.NavController">
+   <top>
+      <GridPane prefHeight="100.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#handleAccueil" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../img/accueil.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="68.0" top="25.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#handleAnnuaire" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@../../../../../img/annuaire.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="68.0" top="25.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#handleGroupe" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+               <image>
+                  <Image url="@../../../../../img/groupe.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="68.0" top="25.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#handleHistorique" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+               <image>
+                  <Image url="@../../../../../img/historique.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="68.0" top="25.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#handleConnaissance" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+               <image>
+                  <Image url="@../../../../../img/link.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="68.0" top="25.0" />
+               </GridPane.margin>
+            </ImageView>
+            <Label onMouseClicked="#handleAccueil" text="Accueil" GridPane.rowIndex="1">
+               <padding>
+                  <Insets left="80.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label onMouseClicked="#handleAnnuaire" text="Annuaire" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <padding>
+                  <Insets left="80.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label onMouseClicked="#handleGroupe" text="Groupes" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <padding>
+                  <Insets left="80.0" top="10.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label onMouseClicked="#handleHistorique" text="Historique des messages" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <padding>
+                  <Insets left="40.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label onMouseClicked="#handleConnaissance" text="Connaissances" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <padding>
+                  <Insets left="60.0" top="10.0" />
+               </padding>
+            </Label>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </GridPane>
+   </top>
+</BorderPane>

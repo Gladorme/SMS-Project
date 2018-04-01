@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Vector;
 
 public class Algo {
-	public static HashMap<Integer, String> lien_nom_numeros;
 	 int minDistance(int dist[], Boolean pluscourtchemin[], int nombre_sommets)
 	 {
 	     // Initialiser la distance minimale

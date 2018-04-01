@@ -32,7 +32,7 @@ public class ConnaissanceController {
 
     
 	   @FXML
-	    private void initialize() {
+	    private void initialize()  {
 		   tel_srcLabel.setText(SMS.tel_src);
 		   tel_contact.setText(affichercontactpropre());
 		  connaissancespotentielles.setText(connaissancepotentielles());
@@ -91,7 +91,6 @@ public class ConnaissanceController {
 		   String resultat="";
 		   for (Map.Entry<String, String> entree : recupcontacts(SMS.tel_src).entrySet()) {
 			   resultat=resultat+"\n"+entree.getKey();
-			
 		}
 		   return resultat;
 	   }
@@ -101,7 +100,7 @@ public class ConnaissanceController {
 		  
 		   Multimap<String,String> recup_groupe= recup_groupes();
 		   
-		   ArrayList<ArrayList<String>> valeurs= new ArrayList();
+		   ArrayList<ArrayList<String>> valeurs= new ArrayList<ArrayList<String>>();
 
 		   for (Collection collection : recup_groupe.asMap().values()) { 
 		   
@@ -111,17 +110,25 @@ public class ConnaissanceController {
 				   valeurs.add(var);
 				   }
 		   }
-		  int[][] graphe = GroupeDePersonnes.creationMatrice(valeurs);
-		  int nombre_sommets= GroupeDePersonnes.nombresommets(graphe);
+		   int[][] graphe = GroupeDePersonnes.creationMatrice(valeurs);
+		   int nombre_sommets= GroupeDePersonnes.nombresommets(graphe);
+		   
 		   Algo t = new Algo();
-		   Vector<String> res =t.dijkstra(graphe, nombre_sommets, GroupeDePersonnes.getTabOrdre(),3);
-		   System.out.println(res);
+		    HashMap<String, Integer> lien_nom_numeros =new HashMap<>();
+		     int cpt=0;
+			for (String string : GroupeDePersonnes.getTabOrdre()) {
+				lien_nom_numeros.put(string,cpt);
+				cpt++;
+			}
+			System.out.println(lien_nom_numeros);
+		   Vector<String> res =t.dijkstra(graphe, nombre_sommets, GroupeDePersonnes.getTabOrdre(),lien_nom_numeros.get("Ladorme Guillaume"));  
 		   HashMap<String,String> a2=ConnaissanceController.recupcontacts(SMS.tel_src);
 		   String resultat=new String();
 		  resultat="";
 		   HashMap<String, String> connaissancepotentielles= new HashMap<>();
 		   connaissancepotentielles.put("Guillaume Ladorme","0645892662");
 		   connaissancepotentielles.put("Ducreux Aldric","0645892985");
+		   connaissancepotentielles.put("Aboukora Ahmed","0645892662");
 
 		   for (String string : res) {
 			if(connaissancepotentielles.containsKey(string) && a2.get(string)==null){ //si on connait pas cette personne et quelle est dans la liste des connaissances potentielles
@@ -132,9 +139,13 @@ public class ConnaissanceController {
 		return resultat;
 	   }
 	   
-}
-	
+public static void main(String args[]) {
+	System.out.println(connaissancepotentielles());
 
+								}
+
+
+}
 
 
 
