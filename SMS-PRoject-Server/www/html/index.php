@@ -12,8 +12,8 @@
 		<?php
 			if (isset($_GET['json'])) {
 				
-				$json_sms = fopen("/var/www/html/requete.js", "w") or die("Unable to open file!");
-				$blacklist = fopen("/var/www/html/blacklist.txt", "r");
+				$json_sms = fopen("requete.js", "w") or die("Unable to open file!");
+				$blacklist = fopen("blacklist.txt", "r");
 				$num_interdit = false;
 				//$data=json_decode($_GET['json'], true);
 				//var_dump($data);
@@ -34,7 +34,7 @@
 					}
 
 					fclose($json_sms);
-					$contenu = json_encode(json_decode(file_get_contents("/var/www/html/requete.js"), true));
+					$contenu = json_encode(json_decode(file_get_contents("requete.js"), true));
 					echo $contenu;;
 					$test = json_decode($contenu, true);
 					//echo $test['msg']; //contient le message uniquement
