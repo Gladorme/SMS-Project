@@ -12,7 +12,7 @@ import fr.rt.sms.model.Groupe;
 import fr.rt.sms.model.SMS;
 
 public class Connexion {
-    private String DBPath = "fr.rt.sms.utils/bdd.db";
+    private String DBPath = "Chemin à la base de donnée";
     private Connection connection = null;
     private Statement statement = null;
  
@@ -25,7 +25,7 @@ public class Connexion {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:" + DBPath);
             statement = connection.createStatement();
-            System.out.println("Connexion ï¿½ " + DBPath + " avec succï¿½s");
+            System.out.println("Connexion à " + DBPath + " avec succès");
         } catch (ClassNotFoundException notFoundException) {
             notFoundException.printStackTrace();
             System.out.println("Erreur de connexion");
@@ -41,7 +41,7 @@ public class Connexion {
             resultat = statement.executeQuery(request);
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Erreur dans la requï¿½te : " + request);
+            System.out.println("Erreur dans la requête : " + request);
         }
         return resultat;
   
@@ -120,12 +120,12 @@ public class Connexion {
         }
     }
     
-    public ResultSet getContacts(String groupe) {
+    public ResultSet getContacts(Groupe groupe) {
     	ResultSet resultat = null;
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("SELECT * FROM Contacts, Groupes, Appartenances WHERE id_groupe = groupe_id AND tel = contact_tel AND Groupes.nom = ?");
-            preparedStatement.setString(1, groupe);
+                    .prepareStatement("SELECT * FROM Contacts, Groupes, Appartenances WHERE id_groupe = groupe_id AND tel = contact_tel AND nom_groupe = ?");
+            preparedStatement.setString(1, groupe.getNom());
             resultat = preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -133,53 +133,92 @@ public class Connexion {
 		return resultat;
     }
     
-    
-    
-    public void deleteGroupe(String nom) {
+    public void addGroupe(Groupe groupe) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("DELETE FROM Groupe WHERE nom = ?");
-            preparedStatement.setString(1, nom);
+                    .prepareStatement("INSERT INTO Groupes (nom_groupe) VALUES(?)");
+            preparedStatement.setString(1, groupe.getNom());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
-    public void addGroupe(Groupe groupe) {
+    public int getId(Groupe groupe) {
+    	ResultSet resultat = null;
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("INSERT INTO Groupes (nom) VALUES(?)");
+                    .prepareStatement("SELECT * FROM Groupes WHERE nom_groupe = ?");
             preparedStatement.setString(1, groupe.getNom());
-            preparedStatement.executeUpdate();
+            resultat = preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+		try {
+			return resultat.getInt("id_groupe");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
     }
     
     public void addAppartenance(Groupe groupe, Contact contact) {
         try {
             PreparedStatement preparedStatement = connection
-            .prepareStatement("INSERT INTO Appartenances (goupe_id, contact_tel) VALUES(?,?)");
+            .prepareStatement("INSERT INTO Appartenances (groupe_id, contact_tel) VALUES(?,?)");
             preparedStatement.setInt(1, groupe.getId());
-            preparedStatement.setString(9, contact.getTel());
+            preparedStatement.setString(2, contact.getTel());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
+    public void deleteAppartenance(Groupe groupe, Contact contact) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("DELETE FROM Appartenances WHERE groupe_id = ? AND contact_tel = ?");
+            preparedStatement.setInt(1, groupe.getId());
+            preparedStatement.setString(2, contact.getTel());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+	public ResultSet getGroupeNonAppartenu(Contact contact) {
+    	ResultSet resultat = null;
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("SELECT * FROM Groupes");
+            		//.prepareStatement("SELECT * FROM Groupes, Appartenances WHERE id_groupe = groupe_id AND contact_tel != ?");
+            //preparedStatement.setString(1, contact.getTel());
+            resultat = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		return resultat;
+	}
+    
     public void deleteGroupe(Groupe groupe) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("DELETE FROM Groupes WHERE nom = ?");
+                    .prepareStatement("DELETE FROM Groupes WHERE nom_groupe = ?");
             preparedStatement.setString(1, groupe.getNom());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-    
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("DELETE FROM Appartenances WHERE groupe_id = ?");
+            preparedStatement.setInt(1, groupe.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } 
 
     
     public void close() {
@@ -190,4 +229,6 @@ public class Connexion {
             e.printStackTrace();
         }
     }
+
+
 }

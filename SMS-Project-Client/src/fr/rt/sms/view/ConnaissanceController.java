@@ -19,7 +19,7 @@ import fr.rt.sms.model.Contact;
 import fr.rt.sms.model.SMS;
 import fr.rt.sms.utils.Algo;
 import fr.rt.sms.utils.Connexion;
-import fr.rt.sms.utils.GroupeDePersonnes;
+import fr.rt.sms.model.GroupeDePersonnes;
 
 import java.util.regex.Pattern;
 public class ConnaissanceController {
