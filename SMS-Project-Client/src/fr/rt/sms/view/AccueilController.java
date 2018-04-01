@@ -18,7 +18,7 @@ public class AccueilController {
 	   @FXML
 	    private void initialize() {
 		   tel_srcLabel.setText(SMS.tel_src);
-		   nbrMessagesLabel.setText("WIP");
+		   nbrMessagesLabel.setText(String.valueOf(SMS.getMessageEnvoye()));
 	    }
 
 	    public void setDialogStage(Stage dialogStage) {

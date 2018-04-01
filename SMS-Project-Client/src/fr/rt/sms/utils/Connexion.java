@@ -163,6 +163,24 @@ public class Connexion {
 		return 0;
     }
     
+    public int getMessageEnvoye() {
+    	ResultSet resultat = null;
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("SELECT count(id_sms) FROM SMS");
+            resultat = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		try {
+			return resultat.getInt("count(id_sms)");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+    }
+    
     public void addAppartenance(Groupe groupe, Contact contact) {
         try {
             PreparedStatement preparedStatement = connection
@@ -191,9 +209,8 @@ public class Connexion {
     	ResultSet resultat = null;
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("SELECT * FROM Groupes");
-            		//.prepareStatement("SELECT * FROM Groupes, Appartenances WHERE id_groupe = groupe_id AND contact_tel != ?");
-            //preparedStatement.setString(1, contact.getTel());
+                    .prepareStatement("SELECT distinct nom_groupe FROM Groupes, Appartenances WHERE ? not in (SELECT distinct contact_tel FROM Appartenances WHERE id_groupe = groupe_id)");
+            preparedStatement.setString(1, contact.getTel());
             resultat = preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();

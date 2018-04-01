@@ -271,21 +271,17 @@ public class MainApp extends Application {
 	    }
 	}
 	  public static void showConnaissance() { 
-	    try { 
-	    	FXMLLoader loader = new FXMLLoader(); 
-	        loader.setLocation(MainApp.class.getResource("view/Connaissance.fxml")); 
-            AnchorPane connaissance = (AnchorPane) loader.load(); 
-            nav.setCenter(connaissance); 
- 
-            Scene scene = new Scene(connaissance); 
-            primaryStage.setScene(scene); 
-            primaryStage.show(); 
-             
-            ConnaissanceController controller = loader.getController(); 
-             
-	    } catch (IOException e) { 
-	      e.printStackTrace(); 
-	    } 
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/Connaissance.fxml"));
+            AnchorPane connaissance = (AnchorPane) loader.load();
+            
+            ConnaissanceController controller = loader.getController();
+
+            nav.setCenter(connaissance);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	  } 
 	
 	public static Stage getPrimaryStage() {

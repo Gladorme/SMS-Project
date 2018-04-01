@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import fr.rt.sms.utils.Connexion;
 import javafx.beans.property.IntegerProperty;
@@ -69,11 +71,11 @@ public class SMS {
     	return this.chiffrement;
     }
     public void sendSMS() throws MalformedURLException, IOException {
-    	String url = "http://localhost/PrivacyAdvice";
+    	String url = "http://localhost/SMS-Project/index.php";
     	String charset = "UTF-8";
-    	String json = "{\"action\" : \"send\", "
-    			    + "\"dest\" : \"" + this.getTel_dest() + "\", "
-    			    + "\"msg\" : \"" + this.getContenu() + "\""
+    	String json = "{\"action\":\"send\","
+    			    + "\"dest\":\"" + this.getTel_dest() + "\","
+    			    + "\"msg\":\"" + this.getContenu() + "\""
     			    + "}"
     			    ;
     	String query = String.format("json=%s", json);
@@ -83,7 +85,8 @@ public class SMS {
     	InputStream reponse = connection.getInputStream();
     	int status = connection.getResponseCode();
     	
-    	System.out.println(url + "?" + query);
+    	System.out.println(url + "?" + query + "\n");
+    	System.out.println("Code réponse" + status);
     	
     }
     public void insertSQL() {
@@ -97,5 +100,13 @@ public class SMS {
         connexion.connect();
         connexion.deleteSMS(this);
         connexion.close();
+    }
+    public static int getMessageEnvoye() {
+        Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
+        connexion.connect();
+        int resultat = connexion.getMessageEnvoye();
+        connexion.close();
+        
+        return resultat;
     }
 }
