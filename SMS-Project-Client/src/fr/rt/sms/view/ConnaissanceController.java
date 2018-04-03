@@ -32,7 +32,7 @@ public class ConnaissanceController {
 
     
 	   @FXML
-	    private void initialize()  {
+	    private void initialize() {
 		   tel_srcLabel.setText(SMS.tel_src);
 		   tel_contact.setText(affichercontactpropre());
 		  connaissancespotentielles.setText(connaissancepotentielles());
@@ -55,7 +55,6 @@ public class ConnaissanceController {
 				 catch (Exception e) {
 					e.printStackTrace();
 				 }
-		        System.out.println();
 		    	connexion.close();
 		    	return tableau;
 				
@@ -83,6 +82,7 @@ public class ConnaissanceController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+					connexion.close();
 		        return alpha;
 				
 			}
@@ -91,15 +91,34 @@ public class ConnaissanceController {
 		   String resultat="";
 		   for (Map.Entry<String, String> entree : recupcontacts(SMS.tel_src).entrySet()) {
 			   resultat=resultat+"\n"+entree.getKey();
+			
 		}
 		   return resultat;
 	   }
 
 
 	  public static String connaissancepotentielles(){
-		  
+			Connexion connexion = new Connexion("src/fr/rt/sms/utils/bdd.db");
+	        connexion.connect();
+	        ResultSet moi ;
+	        String personne= new String();
+	        moi = connexion.query("SELECT nom,prenom,tel FROM CONTACTS");
+	        try {
+				if(moi.getString("tel").equals(SMS.tel_src))
+				{              								
+					personne= moi.getString("nom")+" "+moi.getString("prenom");		   
+				}
+				while (moi.next()) {
+					if(moi.getString("tel").equals(SMS.tel_src))
+					{              								
+						personne= moi.getString("nom")+" "+moi.getString("prenom");		   
+					}
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		   Multimap<String,String> recup_groupe= recup_groupes();
-		   
 		   ArrayList<ArrayList<String>> valeurs= new ArrayList<ArrayList<String>>();
 
 		   for (Collection collection : recup_groupe.asMap().values()) { 
@@ -110,10 +129,9 @@ public class ConnaissanceController {
 				   valeurs.add(var);
 				   }
 		   }
-		   int[][] graphe = GroupeDePersonnes.creationMatrice(valeurs);
-		   int nombre_sommets= GroupeDePersonnes.nombresommets(graphe);
-		   
-		   Algo t = new Algo();
+
+		  int[][] graphe = GroupeDePersonnes.creationMatrice(valeurs);
+		  int nombre_sommets= GroupeDePersonnes.nombresommets(graphe);
 		    HashMap<String, Integer> lien_nom_numeros =new HashMap<>();
 		     int cpt=0;
 			for (String string : GroupeDePersonnes.getTabOrdre()) {
@@ -121,31 +139,31 @@ public class ConnaissanceController {
 				cpt++;
 			}
 			System.out.println(lien_nom_numeros);
-		   Vector<String> res =t.dijkstra(graphe, nombre_sommets, GroupeDePersonnes.getTabOrdre(),lien_nom_numeros.get("Ladorme Guillaume"));  
+
+		   Algo t = new Algo();
+		   Vector<String> res =t.dijkstra(graphe, nombre_sommets, GroupeDePersonnes.getTabOrdre(),lien_nom_numeros.get(personne));
 		   HashMap<String,String> a2=ConnaissanceController.recupcontacts(SMS.tel_src);
 		   String resultat=new String();
 		  resultat="";
 		   HashMap<String, String> connaissancepotentielles= new HashMap<>();
 		   connaissancepotentielles.put("Guillaume Ladorme","0645892662");
 		   connaissancepotentielles.put("Ducreux Aldric","0645892985");
-		   connaissancepotentielles.put("Aboukora Ahmed","0645892662");
 
 		   for (String string : res) {
 			if(connaissancepotentielles.containsKey(string) && a2.get(string)==null){ //si on connait pas cette personne et quelle est dans la liste des connaissances potentielles
 				resultat=resultat+string+" au "+connaissancepotentielles.get(string)+"\n";
 			}
 		}
-		
+	    connexion.close();
 		return resultat;
 	   }
-	   
-public static void main(String args[]) {
-	System.out.println(connaissancepotentielles());
+	  public static void main(String args[]) {}
 
-								}
-
-
+	  
+	  
 }
+	
+
 
 
 
