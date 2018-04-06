@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 
 import fr.rt.sms.utils.Connexion;
 import javafx.beans.property.IntegerProperty;
@@ -78,15 +79,20 @@ public class SMS {
     			    + "\"msg\":\"" + this.getContenu() + "\""
     			    + "}"
     			    ;
-    	String query = String.format("json=%s", json);
+    	// On transmet le json en base64 pour ne pas avoir d'espace dans le paramètre json, 
+    	// sinon on le serveur nous répond une erreur 400, on ne sait pas d'où ça vient, 
+    	// car quand on test sur navigateur il n'y a pas de problème ...
+    	String jsonBase64 = Base64.getEncoder().encodeToString(json.getBytes());
+
     	
-    	HttpURLConnection connection = (HttpURLConnection) new URL(url + "?" + query).openConnection();
+    	HttpURLConnection connection = (HttpURLConnection) new URL(url + "?json=" + jsonBase64).openConnection();
     	connection.setRequestProperty("Accept-Charset", charset);
-    	InputStream reponse = connection.getInputStream();
+    	//InputStream reponse = connection.getInputStream();
     	int status = connection.getResponseCode();
     	
-    	System.out.println(url + "?" + query + "\n");
-    	System.out.println("Code réponse" + status);
+    	
+    	System.out.println(url + "?json=" + jsonBase64 + "\n");
+    	System.out.println("Code réponse: " + status);
     	
     }
     public void insertSQL() {

@@ -17,7 +17,7 @@
 				$num_interdit = false;
 				//$data=json_decode($_GET['json'], true);
 				//var_dump($data);
-				$data = json_decode($_GET['json'], true);
+				$data = json_decode(base64_decode($_GET['json']), true);
 				//echo $res['msg'];
 				//$data=array("action"=>"send","dest"=>"0606060607","msg"=>"Mr Gautero");
 
@@ -51,9 +51,11 @@
 				foreach ($_SESSION['historique'] as $key => $value) {
 					echo $key . ' => ' . $value . '<br />';
 				}*/
+				
+				echo '{"result" : "ok"}';
 
 			}else{
-				echo "Problème d'url.";
+				echo '{"result" : "problème"}';
 			}
 		?>
 
